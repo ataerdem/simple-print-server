@@ -1,0 +1,62 @@
+<!-- templates/upload.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload and Print</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-form {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .messages {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload and Print File</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="messages {% if 'Error' in message %}error{% else %}success{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="upload-form">
+        <form method="post" enctype="multipart/form-data">
+            <p>Select a file to upload and print:</p>
+            <input type="file" name="file" accept=".txt,.pdf,.doc,.docx">
+            <br><br>
+            <input type="submit" value="Upload and Print">
+        </form>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <p>Supported file types: PDF, TXT, DOC, DOCX</p>
+    </div>
+</body>
+</html>
